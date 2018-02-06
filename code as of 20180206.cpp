@@ -402,11 +402,12 @@ static void BleAccelDataTransmit(void * param1, uint32_t param2)
     /* Return value for software timer */
     int8_t timerReturnVal;
     /* buffer for accel data receive function */
-    uint8_t *accelDataRec = 0;
-    accelDataRec = (unsigned int*) realloc(accelDataRec, 6 * DataArrayLength * sizeof(int)); /* incompatible pointer type, to be fixed
+    uint8_t accelDataRec[6*DataArrayLength];
+    memset(accelDataRec, 0, 6*DataArrayLength);
+    /*accelDataRec = (unsigned int*) realloc(accelDataRec, 6 * DataArrayLength * sizeof(int)); /* incompatible pointer type, to be fixed
 	/*Copying the Accel value into BLE-Buffer*/
     printf("Passed accelDataRec memory allocation \n\r");
-	for (uint16_t j = 0; j < sizeof(Data); j++) /*schreibt alle Werte des Dataarrays in den Buffer */
+	for (uint16_t j = 0; j < DataArrayLength; j++) /*schreibt alle Werte des Dataarrays in den Buffer */
 	{
 		switch(j)
 		{
